@@ -9,4 +9,7 @@ import net.minecraft.world.item.Item;
 public class ModItemTags {
     public static final TagKey<Item> OVERHEATED_ITEMS = ItemTags.create(
             ResourceLocation.fromNamespaceAndPath(Overheated.MODID, "overheated_items"));
+
+    public static final TagKey<Item> OVERHEATABLE_ITEMS = ItemTags.create(
+            ResourceLocation.fromNamespaceAndPath(Overheated.MODID, "overheatable_items"));
 }

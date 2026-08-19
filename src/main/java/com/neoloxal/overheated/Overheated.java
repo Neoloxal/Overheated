@@ -1,6 +1,7 @@
 package com.neoloxal.overheated;
 
 import com.mojang.logging.LogUtils;
+import com.neoloxal.overheated.item.ModDataComponents;
 import com.neoloxal.overheated.item.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -37,9 +38,12 @@ public class Overheated {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public Overheated(IEventBus modEventBus, ModContainer modContainer) {
+        ModDataComponents.register(modEventBus);
         ModItems.register(modEventBus);
 
         modEventBus.addListener(this::addCreative);
+
+        NeoForge.EVENT_BUS.register(ModInteractions.class);
     }
 
     // Add the example block item to the building blocks tab

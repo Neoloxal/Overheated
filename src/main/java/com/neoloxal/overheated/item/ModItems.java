@@ -20,7 +20,7 @@ public class ModItems {
 
     public static final DeferredItem<AxeItem> OVERHEATED_AXE = ITEMS.register("overheated_iron_axe",
             () -> new AxeItem(Tiers.IRON, new Item.Properties()
-                    .attributes(AxeItem.createAttributes(Tiers.IRON, 6.5f, -3.6f))));
+                    .attributes(AxeItem.createAttributes(Tiers.IRON, 7f, -3.6f))));
 
     public static final DeferredItem<ShovelItem> OVERHEATED_SHOVEL = ITEMS.register("overheated_iron_shovel",
             () -> new ShovelItem(Tiers.IRON, new Item.Properties()
