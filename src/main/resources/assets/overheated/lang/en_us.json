@@ -6,5 +6,6 @@
   "item.overheated.overheated_iron_hoe": "Overheated Iron Hoe",
 
 
-  "tooltip.overheated.overheat_time": "§6Overheat Time: %sm %ss"
+  "tooltip.overheated.overheat_time": "§6Overheat Time§r: %sm %ss",
+  "tooltip.overheated.overheat_time.infinite": "§6Overheat Time§r: ∞"
 }

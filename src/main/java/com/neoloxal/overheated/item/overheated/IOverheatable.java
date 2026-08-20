@@ -3,45 +3,74 @@ package com.neoloxal.overheated.item.overheated;
 import com.neoloxal.overheated.Overheated;
 import com.neoloxal.overheated.item.ModDataComponents;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.data.worldgen.DimensionTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.dimension.DimensionType;
 
 import java.util.List;
 
 public interface IOverheatable {
-    default void tickHeat(ItemStack stack, Level level, Entity entity, int slotId) {
+    default void tickHeat(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         if (stack.has(ModDataComponents.OVERHEAT_TIME.get())) {
             if (entity instanceof Player player) {
-                if (stack.get(ModDataComponents.OVERHEAT_TIME.get()) == 0) {
-                    ItemStack newStack = Overheated.cooling_map.get(stack.getItem()).getDefaultInstance();
-                    newStack.applyComponents(stack.getComponents());
-                    newStack.set(DataComponents.ATTRIBUTE_MODIFIERS,
-                            Overheated.cooling_map.get(stack.getItem()).getDefaultInstance().get(DataComponents.ATTRIBUTE_MODIFIERS));
-                    newStack.remove(ModDataComponents.OVERHEAT_TIME.get());
-                    player.getInventory().setItem(slotId, newStack);
+                if (stack.get(ModDataComponents.OVERHEAT_TIME.get()) <= 0) {
+                    player.getInventory().setItem(slotId, cooldownItem(stack));
                     return;
                 }
-                int ticksPerDecrement = 1;
-                if (level.dimension() == Level.NETHER) {ticksPerDecrement = 2;}
+                if (stack.get(ModDataComponents.OVERHEAT_TIME.get()) >= 999999) {
+                    return;
+                }
+                int ticksPerDecrement = 20;
+                if (level.dimension() == Level.NETHER) {ticksPerDecrement = 40;}
+                if (level.isRainingAt(player.getOnPos())) {ticksPerDecrement = 5;}
                 if (level.getGameTime() % ticksPerDecrement == 0) {
-                    stack.set(ModDataComponents.OVERHEAT_TIME.get(), stack.get(ModDataComponents.OVERHEAT_TIME.get()) - 1);
+                    stack.set(ModDataComponents.OVERHEAT_TIME.get(), stack.get(ModDataComponents.OVERHEAT_TIME.get()) - 20);
+                }
+
+                if (isSelected) {
+                    if (player.isInWater()) {
+                        player.getInventory().setItem(slotId, cooldownItem(stack));
+                    }
                 }
             }
         }
     }
 
+    private ItemStack cooldownItem(ItemStack stack) {
+        ItemStack newStack = Overheated.cooling_map.get(stack.getItem()).getDefaultInstance();
+        newStack.applyComponents(stack.getComponents());
+        newStack.set(DataComponents.ATTRIBUTE_MODIFIERS,
+                Overheated.cooling_map.get(stack.getItem()).getDefaultInstance().get(DataComponents.ATTRIBUTE_MODIFIERS));
+        newStack.remove(ModDataComponents.OVERHEAT_TIME.get());
+        return newStack;
+    }
+
     default void appendOverheatText(ItemStack stack, List<Component> tooltipComponents) {
         if (stack.has(ModDataComponents.OVERHEAT_TIME.get())) {
-            int timeLeft = stack.get(ModDataComponents.OVERHEAT_TIME.get());
-            tooltipComponents.add(Component.translatable("tooltip.overheated.overheat_time",
-                    ((int) Math.floor(timeLeft / 20) / 60),
-                    ((int) Math.floor(timeLeft / 20) % 60)/* +
+            if (stack.get(ModDataComponents.OVERHEAT_TIME.get()) < 999999) {
+                int timeLeft = stack.get(ModDataComponents.OVERHEAT_TIME.get());
+                tooltipComponents.add(Component.translatable("tooltip.overheated.overheat_time",
+                        ((int) Math.floor(timeLeft / 20) / 60),
+                        ((int) Math.floor(timeLeft / 20) % 60)/* +
                             ((float) ((timeLeft / 2) % 10)) / 10f)*/));
+            } else {
+                tooltipComponents.add(Component.translatable("tooltip.overheated.overheat_time.infinite"));
+            }
         }
+    }
+
+    default boolean shouldReset(ItemStack oldStack, ItemStack newStack, boolean fallBack) {
+        ItemStack oldStackCopy = oldStack.copy();
+        oldStackCopy.remove(ModDataComponents.OVERHEAT_TIME.get());
+
+        ItemStack newStackCopy = newStack.copy();
+        newStackCopy.remove(ModDataComponents.OVERHEAT_TIME.get());
+
+        if (ItemStack.isSameItemSameComponents(oldStackCopy, newStackCopy)) {
+            return false;
+        }
+        return fallBack;
     }
 }

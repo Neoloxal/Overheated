@@ -56,13 +56,28 @@ public class Overheated {
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        ItemStack overheated_sword = ModItems.OVERHEATED_SWORD.toStack();
+        overheated_sword.set(ModDataComponents.OVERHEAT_TIME, 999999);
+
+        ItemStack overheated_shovel = ModItems.OVERHEATED_SHOVEL.toStack();
+        overheated_shovel.set(ModDataComponents.OVERHEAT_TIME, 999999);
+
+        ItemStack overheated_pickaxe = ModItems.OVERHEATED_PICKAXE.toStack();
+        overheated_pickaxe.set(ModDataComponents.OVERHEAT_TIME, 999999);
+
+        ItemStack overheated_axe = ModItems.OVERHEATED_AXE.toStack();
+        overheated_axe.set(ModDataComponents.OVERHEAT_TIME, 999999);
+
+        ItemStack overheated_hoe = ModItems.OVERHEATED_HOE.toStack();
+        overheated_hoe.set(ModDataComponents.OVERHEAT_TIME, 999999);
+
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
-            event.insertAfter(Items.IRON_SWORD.getDefaultInstance(), ModItems.OVERHEATED_SWORD.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(Items.IRON_SWORD.getDefaultInstance(), overheated_sword, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         } else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            event.insertAfter(Items.IRON_HOE.getDefaultInstance(), ModItems.OVERHEATED_SHOVEL.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertAfter(ModItems.OVERHEATED_SHOVEL.toStack(), ModItems.OVERHEATED_PICKAXE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertAfter(ModItems.OVERHEATED_PICKAXE.toStack(), ModItems.OVERHEATED_AXE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertAfter(ModItems.OVERHEATED_AXE.toStack(), ModItems.OVERHEATED_HOE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(Items.IRON_HOE.getDefaultInstance(), overheated_shovel, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(overheated_shovel, overheated_pickaxe, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(overheated_pickaxe, overheated_axe, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(overheated_axe, overheated_hoe, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }
 
