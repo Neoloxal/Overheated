@@ -62,6 +62,11 @@ public interface IOverheatable {
     }
 
     default boolean shouldReset(ItemStack oldStack, ItemStack newStack, boolean fallBack) {
+        if (newStack.has(ModDataComponents.CHANGED.get())) {
+            newStack.remove(ModDataComponents.CHANGED.get());
+            return true;
+        }
+
         ItemStack oldStackCopy = oldStack.copy();
         oldStackCopy.remove(ModDataComponents.OVERHEAT_TIME.get());
 

@@ -7,10 +7,16 @@ public class OverheatedServerConfig {
     public static final OverheatedServerConfig CONFIG;
     public static final ModConfigSpec CONFIG_SPEC;
 
+    public final ModConfigSpec.ConfigValue<Integer> overheated_heat_time;
     public final ModConfigSpec.ConfigValue<Integer> cooling_heal;
     public final ModConfigSpec.ConfigValue<Integer> overheated_sword_flame_time;
 
     private OverheatedServerConfig(ModConfigSpec.Builder builder) {
+        overheated_heat_time = builder
+                .translation("overheated.config.overheated_heat_time")
+                .comment("Overheat addon time")
+                .define("overheated_heat_time", 1500);
+
         cooling_heal = builder
                 .translation("overheated.config.cooling_heal")
                 .comment("Cooling Heal")
