@@ -1,4 +1,15 @@
 {
+  "overheated.config.default_overheated_time": "Default Overheated Time",
+  "overheated.config.default_overheated_time.tooltip": "Changes the amount of time overheated items stay overheated for.",
+
+  "overheated.config.cooling_heal": "Cooling Repair",
+  "overheated.config.cooling_heal.tooltip": "The amount cooling an overheated weapon repairs.",
+
+  "overheated.config.overheated_sword_flame_time": "Overheated Iron Sword Fire Time",
+  "overheated.config.overheated_sword_flame_time.tooltip": "Changes the time the overheated iron sword puts an entity on fire in ticks.",
+
+
+
   "item.overheated.overheated_iron_sword": "Overheated Iron Sword",
   "item.overheated.overheated_iron_pickaxe": "Overheated Iron Pickaxe",
   "item.overheated.overheated_iron_axe": "Overheated Iron Axe",

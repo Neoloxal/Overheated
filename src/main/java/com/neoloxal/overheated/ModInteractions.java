@@ -57,7 +57,7 @@ public class ModInteractions {
                     newStack.set(DataComponents.ATTRIBUTE_MODIFIERS,
                             cooling_map.get(stack.getItem()).getDefaultInstance().get(DataComponents.ATTRIBUTE_MODIFIERS));
                     newStack.remove(ModDataComponents.OVERHEAT_TIME.get());
-                    newStack.setDamageValue(Math.max(0, newStack.getDamageValue() - 5));
+                    newStack.setDamageValue(Math.max(0, newStack.getDamageValue() - OverheatedServerConfig.CONFIG.cooling_heal.get()));
                     player.setItemInHand(hand, newStack);
 
                     int cauldronLevel = state.getValue(BlockStateProperties.LEVEL_CAULDRON);

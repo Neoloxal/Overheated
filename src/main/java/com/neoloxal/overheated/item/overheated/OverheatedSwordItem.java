@@ -1,8 +1,10 @@
 package com.neoloxal.overheated.item.overheated;
 
+import com.neoloxal.overheated.OverheatedServerConfig;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
@@ -32,7 +34,11 @@ public class OverheatedSwordItem extends SwordItem implements IOverheatable {
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         boolean canHurtEnemy = super.hurtEnemy(stack, target, attacker);
         if (canHurtEnemy) {
-            target.setRemainingFireTicks(40);
+            if (attacker instanceof Player player) {
+                if (player.getAttackStrengthScale(0f) == 1f) {
+                    target.setRemainingFireTicks(OverheatedServerConfig.CONFIG.overheated_sword_flame_time.get());
+                }
+            }
         }
         return canHurtEnemy;
     }

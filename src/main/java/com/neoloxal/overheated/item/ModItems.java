@@ -1,6 +1,8 @@
 package com.neoloxal.overheated.item;
 
 import com.neoloxal.overheated.Overheated;
+import com.neoloxal.overheated.OverheatedServerConfig;
+import com.neoloxal.overheated.OverheatedStartupConfig;
 import com.neoloxal.overheated.item.overheated.*;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
@@ -8,7 +10,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModItems {
-    private static final int OVERHEAT_TIME = 3000;
+    private static final int OVERHEAT_TIME = OverheatedStartupConfig.CONFIG.default_overheated_time.get();
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Overheated.MODID);
 

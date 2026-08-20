@@ -4,13 +4,10 @@ import com.mojang.logging.LogUtils;
 import com.neoloxal.overheated.item.ModDataComponents;
 import com.neoloxal.overheated.item.ModItems;
 import net.minecraft.world.item.*;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
@@ -28,13 +25,15 @@ public class Overheated {
     public static Map<Item, Item> cooling_map;
 
     public Overheated(IEventBus modEventBus, ModContainer modContainer) {
+        NeoForge.EVENT_BUS.register(ModInteractions.class);
+        modContainer.registerConfig(ModConfig.Type.SERVER, OverheatedServerConfig.CONFIG_SPEC);
+        modContainer.registerConfig(ModConfig.Type.STARTUP, OverheatedStartupConfig.CONFIG_SPEC);
+
         ModDataComponents.register(modEventBus);
         ModItems.register(modEventBus);
 
         modEventBus.addListener(this::addCreative);
         modEventBus.addListener(this::commonSetup);
-
-        NeoForge.EVENT_BUS.register(ModInteractions.class);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
@@ -78,14 +77,6 @@ public class Overheated {
             event.insertAfter(overheated_shovel, overheated_pickaxe, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             event.insertAfter(overheated_pickaxe, overheated_axe, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             event.insertAfter(overheated_axe, overheated_hoe, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        }
-    }
-
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
         }
     }
 }

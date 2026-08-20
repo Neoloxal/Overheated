@@ -38,7 +38,7 @@ public class OverheatedAxeItem extends AxeItem implements IOverheatable {
 
         if (canHurtEnemy && !level.isClientSide()) {
             if (attacker instanceof Player player) {
-                if (player.getAttackStrengthScale(0f) == 1.0f) {
+                if (player.getAttackStrengthScale(0f) == 1f) {
                     level.explode(
                             target,
                             new DamageSources(level.registryAccess()).explosion(target, attacker),
