@@ -58,6 +58,5 @@ public class OverheatedSwordItem extends SwordItem implements IOverheatable {
     @Override
     public void verifyComponentsAfterLoad(ItemStack stack) {
         super.verifyComponentsAfterLoad(stack);
-        updateOverheatTime(stack);
     }
 }

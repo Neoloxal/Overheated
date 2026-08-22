@@ -16,31 +16,36 @@ public class ModItems {
     public static final DeferredItem<SwordItem> OVERHEATED_SWORD = ITEMS.register("overheated_iron_sword",
             () -> new OverheatedSwordItem(Tiers.IRON, new Item.Properties()
                     .attributes(SwordItem.createAttributes(Tiers.IRON, 5, -2.8f))
-                    .component(ModDataComponents.OVERHEAT_TIME, OVERHEAT_TIME)
+                    .component(ModDataComponents.OVERHEAT_TIME.get(), OVERHEAT_TIME)
+                    .component(ModDataComponents.CHANGED.get(), true)
             ));
 
     public static final DeferredItem<PickaxeItem> OVERHEATED_PICKAXE = ITEMS.register("overheated_iron_pickaxe",
             () -> new OverheatedPickaxeItem(Tiers.IRON, new Item.Properties()
                     .attributes(PickaxeItem.createAttributes(Tiers.IRON, 1.5f, -2.2f))
-                    .component(ModDataComponents.OVERHEAT_TIME, OVERHEAT_TIME)
+                    .component(ModDataComponents.OVERHEAT_TIME.get(), OVERHEAT_TIME)
+                    .component(ModDataComponents.CHANGED.get(), true)
             ));
 
     public static final DeferredItem<AxeItem> OVERHEATED_AXE = ITEMS.register("overheated_iron_axe",
             () -> new OverheatedAxeItem(Tiers.IRON, new Item.Properties()
                     .attributes(AxeItem.createAttributes(Tiers.IRON, 7f, -3.6f))
-                    .component(ModDataComponents.OVERHEAT_TIME, OVERHEAT_TIME)
+                    .component(ModDataComponents.OVERHEAT_TIME.get(), OVERHEAT_TIME)
+                    .component(ModDataComponents.CHANGED.get(), true)
             ));
 
     public static final DeferredItem<ShovelItem> OVERHEATED_SHOVEL = ITEMS.register("overheated_iron_shovel",
             () -> new OverheatedShovelItem(Tiers.IRON, new Item.Properties()
                     .attributes(ShovelItem.createAttributes(Tiers.IRON, 2f, -1.5f))
-                    .component(ModDataComponents.OVERHEAT_TIME, OVERHEAT_TIME)
+                    .component(ModDataComponents.OVERHEAT_TIME.get(), OVERHEAT_TIME)
+                    .component(ModDataComponents.CHANGED.get(), true)
             ));
 
     public static final DeferredItem<HoeItem> OVERHEATED_HOE = ITEMS.register("overheated_iron_hoe",
             () -> new OverheatedHoeItem(Tiers.IRON, new Item.Properties()
                     .attributes(HoeItem.createAttributes(Tiers.IRON, -1.5F, -1.5F))
-                    .component(ModDataComponents.OVERHEAT_TIME, OVERHEAT_TIME)
+                    .component(ModDataComponents.OVERHEAT_TIME.get(), OVERHEAT_TIME)
+                    .component(ModDataComponents.CHANGED.get(), true)
             ));
 
     public static void register(IEventBus eventBus) {

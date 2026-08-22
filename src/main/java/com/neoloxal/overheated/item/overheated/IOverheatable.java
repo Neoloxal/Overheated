@@ -25,6 +25,7 @@ public interface IOverheatable {
                         return;
                     }
                     if (stack.get(ModDataComponents.OVERHEAT_TIME.get()) >= 999999) {
+                        stack.remove(ModDataComponents.CHANGED.get());
                         return;
                     }
                     int ticksPerDecrement = 20;
@@ -92,7 +93,7 @@ public interface IOverheatable {
     }
 
     default void updateOverheatTime(ItemStack stack) {
-        if (stack.has(ModDataComponents.OVERHEAT_TIME.get())) {
+        if (stack.has(ModDataComponents.OVERHEAT_TIME.get()) && stack.has(ModDataComponents.CHANGED.get())) {
             if (stack.get(ModDataComponents.OVERHEAT_TIME.get()) == 3000) {
                 stack.set(ModDataComponents.OVERHEAT_TIME.get(), OverheatedServerConfig.CONFIG.default_overheated_time.get());
             }
