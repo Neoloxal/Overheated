@@ -3,6 +3,7 @@ package com.neoloxal.overheated;
 import com.mojang.logging.LogUtils;
 import com.neoloxal.overheated.item.ModDataComponents;
 import com.neoloxal.overheated.item.ModItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -11,6 +12,8 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.slf4j.Logger;
 
 import java.util.Map;
@@ -34,6 +37,7 @@ public class Overheated {
 
         modEventBus.addListener(this::addCreative);
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::registerPayloads);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
@@ -78,5 +82,17 @@ public class Overheated {
             event.insertAfter(overheated_pickaxe, overheated_axe, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             event.insertAfter(overheated_axe, overheated_hoe, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
+    }
+
+    public void registerPayloads(RegisterPayloadHandlersEvent event) {
+        final PayloadRegistrar registrar = event.registrar(MODID);
+        registrar.playToClient(
+                ResetAttackTickerPayload.TYPE,
+                ResetAttackTickerPayload.STREAM_CODEC,
+                ((payload, context) ->
+                        context.enqueueWork(() -> {
+                            Minecraft.getInstance().player.resetAttackStrengthTicker();
+                        }))
+        );
     }
 }

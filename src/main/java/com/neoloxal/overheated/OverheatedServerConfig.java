@@ -9,6 +9,7 @@ public class OverheatedServerConfig {
 
     public final ModConfigSpec.ConfigValue<Integer> overheated_heat_time;
     public final ModConfigSpec.ConfigValue<Integer> cooling_heal;
+    public final ModConfigSpec.ConfigValue<Boolean> water_cooling;
     public final ModConfigSpec.ConfigValue<Integer> overheated_sword_flame_time;
 
     private OverheatedServerConfig(ModConfigSpec.Builder builder) {
@@ -21,6 +22,11 @@ public class OverheatedServerConfig {
                 .translation("overheated.config.cooling_heal")
                 .comment("Cooling Heal")
                 .define("cooling_heal", 5);
+
+        water_cooling = builder
+                .translation("overheated.config.water_cooling")
+                .comment("Eable Water Cooling")
+                .define("water_cooling", true);
 
         overheated_sword_flame_time = builder
                 .translation("overheated.config.overheated_sword_flame_time")

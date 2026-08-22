@@ -8,6 +8,9 @@
   "overheated.config.cooling_heal": "Cooling Repair",
   "overheated.config.cooling_heal.tooltip": "The amount cooling an overheated tool repairs.",
 
+  "overheated.config.water_cooling": "Enable Water Cooling",
+  "overheated.config.water_cooling.tooltip": "Whether going in water while holding a overheated tool cools it.",
+
   "overheated.config.overheated_sword_flame_time": "Overheated Iron Sword Fire Time",
   "overheated.config.overheated_sword_flame_time.tooltip": "Changes the time the overheated iron sword puts an entity on fire in ticks.",
 
