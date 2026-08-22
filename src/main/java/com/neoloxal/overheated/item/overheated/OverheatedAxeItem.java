@@ -74,4 +74,10 @@ public class OverheatedAxeItem extends AxeItem implements IOverheatable {
         boolean vanillaBool = super.shouldCauseBlockBreakReset(oldStack, newStack);
         return shouldReset(oldStack, newStack, vanillaBool);
     }
+
+    @Override
+    public void verifyComponentsAfterLoad(ItemStack stack) {
+        super.verifyComponentsAfterLoad(stack);
+        updateOverheatTime(stack);
+    }
 }

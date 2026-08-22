@@ -30,7 +30,6 @@ public class Overheated {
     public Overheated(IEventBus modEventBus, ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(ModInteractions.class);
         modContainer.registerConfig(ModConfig.Type.SERVER, OverheatedServerConfig.CONFIG_SPEC);
-        modContainer.registerConfig(ModConfig.Type.STARTUP, OverheatedStartupConfig.CONFIG_SPEC);
 
         ModDataComponents.register(modEventBus);
         ModItems.register(modEventBus);

@@ -1,9 +1,9 @@
 {
   "overheated.config.default_overheated_time": "Default Overheated Time",
-  "overheated.config.default_overheated_time.tooltip": "Changes the amount of time overheated items stay overheated for.",
+  "overheated.config.default_overheated_time.tooltip": "Changes the amount of ticks overheated items stay overheated for.",
 
   "overheated.config.overheated_heat_time": "Bonus Heated Time",
-  "overheated.config.overheated_heat_time.tooltip": "The amount heating an overheated tool adds to the heat time.",
+  "overheated.config.overheated_heat_time.tooltip": "The amount heating an overheated tool adds to the overheated ticks.",
 
   "overheated.config.cooling_heal": "Cooling Repair",
   "overheated.config.cooling_heal.tooltip": "The amount cooling an overheated tool repairs.",

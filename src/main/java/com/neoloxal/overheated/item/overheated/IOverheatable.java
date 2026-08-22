@@ -90,4 +90,12 @@ public interface IOverheatable {
         }
         return fallBack;
     }
+
+    default void updateOverheatTime(ItemStack stack) {
+        if (stack.has(ModDataComponents.OVERHEAT_TIME.get())) {
+            if (stack.get(ModDataComponents.OVERHEAT_TIME.get()) == 3000) {
+                stack.set(ModDataComponents.OVERHEAT_TIME.get(), OverheatedServerConfig.CONFIG.default_overheated_time.get());
+            }
+        }
+    }
 }
