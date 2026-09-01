@@ -12,6 +12,7 @@ public class OverheatedServerConfig {
     public final ModConfigSpec.ConfigValue<Integer> cooling_heal;
     public final ModConfigSpec.ConfigValue<Boolean> water_cooling;
     public final ModConfigSpec.ConfigValue<Integer> overheated_sword_flame_time;
+    public final ModConfigSpec.ConfigValue<Double> overheated_axe_knockback_mult;
 
     private OverheatedServerConfig(ModConfigSpec.Builder builder) {
         default_overheated_time = builder
@@ -38,6 +39,11 @@ public class OverheatedServerConfig {
                 .translation("overheated.config.overheated_sword_flame_time")
                 .comment("Sword Flame Time")
                 .define("overheated_sword_flame_time", 80);
+
+        overheated_axe_knockback_mult = builder
+                .translation("overheated.config.overheated_axe_knockback_mult")
+                .comment("Overheated axe knockback multiplier")
+                .define("overheated_axe_knockback_mult", 1.0);
     }
 
     static {

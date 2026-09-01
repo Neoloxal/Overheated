@@ -1,5 +1,6 @@
 package com.neoloxal.overheated.item.overheated;
 
+import com.neoloxal.overheated.OverheatedServerConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
@@ -11,6 +12,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
@@ -51,12 +53,25 @@ public class OverheatedAxeItem extends AxeItem implements IOverheatable {
                                     }
                                     return shouldDamage;
                                 }
+
+                                @Override
+                                public float getKnockbackMultiplier(Entity entity) {
+                                    if (entity == attacker) {
+                                        return 0;
+                                    }
+                                    return super.getKnockbackMultiplier(entity);
+                                }
                             },
                             target.position(),
                             2,
                             false,
                             Level.ExplosionInteraction.TRIGGER
                     );
+                    player.addDeltaMovement(player.getForward()
+                            .multiply(new Vec3(-.6, 0, -.6))
+                            .add(new Vec3(0, 0.35, 0))
+                            .multiply(new Vec3(OverheatedServerConfig.CONFIG.overheated_axe_knockback_mult.get(), OverheatedServerConfig.CONFIG.overheated_axe_knockback_mult.get(), OverheatedServerConfig.CONFIG.overheated_axe_knockback_mult.get())));
+                    player.hurtMarked = true;
                 }
             }
         }

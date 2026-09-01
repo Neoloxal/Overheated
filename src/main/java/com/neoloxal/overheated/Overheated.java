@@ -75,6 +75,7 @@ public class Overheated {
 
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             event.insertAfter(Items.IRON_SWORD.getDefaultInstance(), overheated_sword, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(Items.IRON_AXE.getDefaultInstance(), overheated_axe, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         } else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.insertAfter(Items.IRON_HOE.getDefaultInstance(), overheated_shovel, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             event.insertAfter(overheated_shovel, overheated_pickaxe, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
